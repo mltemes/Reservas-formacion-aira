@@ -112,6 +112,12 @@ button.full {
   background:#aaa;
   cursor:not-allowed;
 }
+.export-btn {
+  background:#2563eb;
+}
+.reset-btn {
+  background:#dc2626;
+}
 .list {
   margin-top:40px;
   background:white;
@@ -125,9 +131,6 @@ button.full {
 }
 .list-item:last-child {
   border-bottom:none;
-}
-.export-btn {
-  background:#2563eb;
 }
 .empty {
   color:#666;
@@ -146,6 +149,7 @@ button.full {
     <div class="notice">Cada turno tiene un máximo de 13 plazas. Cada email solo puede reservar una vez.</div>
     <div class="actions">
       <button class="export-btn" onclick="exportarExcel()">Exportar a Excel por turnos</button>
+      <button class="reset-btn" onclick="resetReservas()">Reset</button>
     </div>
   </div>
 
@@ -158,6 +162,9 @@ button.full {
 </div>
 
 <script>
+const PASSWORD_RESET = "@ira2026";
+const STORAGE_KEY = "reservas_aira";
+
 const TURNOS = [
   {id:1, nombre:"Turno 1", descripcion:"Viernes día 13 9:30 - 10:30 en TABOADA", plazas:13},
   {id:2, nombre:"Turno 2", descripcion:"Viernes día 20 9:30 - 10:30 en TABOADA", plazas:13},
@@ -167,11 +174,11 @@ const TURNOS = [
 ];
 
 function getReservas() {
-  return JSON.parse(localStorage.getItem("reservas_aira") || "[]");
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 }
 
 function save(r) {
-  localStorage.setItem("reservas_aira", JSON.stringify(r));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(r));
 }
 
 function escapeXml(value) {
@@ -250,6 +257,23 @@ function reservar(id) {
 
   save(r);
   render();
+}
+
+function resetReservas() {
+  const password = prompt("Introduce la contraseña para resetear las plazas:");
+  if (password === null) return;
+
+  if (password !== PASSWORD_RESET) {
+    alert("Contraseña incorrecta");
+    return;
+  }
+
+  const confirmar = confirm("¿Seguro que quieres borrar todas las reservas y poner los contadores a 0?");
+  if (!confirmar) return;
+
+  localStorage.removeItem(STORAGE_KEY);
+  render();
+  alert("Reservas reseteadas correctamente");
 }
 
 function mostrarReservas() {
