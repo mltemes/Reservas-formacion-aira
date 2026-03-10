@@ -7,133 +7,148 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background:#f5f7fb;
-  margin:0;
-  color:#1f2937;
+  background: #f5f7fb;
+  margin: 0;
+  color: #1f2937;
 }
 header {
-  display:flex;
-  align-items:center;
-  background:white;
-  padding:15px 25px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 15px 25px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 header img {
-  height:70px;
-  width:auto;
-  margin-right:20px;
+  height: 70px;
+  width: auto;
+  margin-right: 20px;
 }
 .container {
-  max-width:1100px;
-  margin:auto;
-  padding:30px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px;
 }
 .topbar {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 .notice {
-  font-size:13px;
-  color:#666;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
 }
 .actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 20px;
 }
 .card {
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 3px 8px rgba(0,0,0,0.08);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 .card h3 {
-  margin-top:0;
-  margin-bottom:8px;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 .desc {
-  color:#555;
-  font-size:14px;
-  margin-bottom:10px;
-  min-height:38px;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+  min-height: 38px;
 }
 .counter {
-  font-size:16px;
-  font-weight:bold;
-  margin:10px 0 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0 4px;
 }
 .small {
-  font-size:13px;
-  color:#666;
-  margin-bottom:12px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
 }
 .progress {
-  width:100%;
-  height:10px;
-  background:#e5e7eb;
-  border-radius:999px;
-  overflow:hidden;
-  margin-bottom:14px;
+  width: 100%;
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 14px;
 }
 .progress-bar {
-  height:100%;
-  background:#8cc63f;
-  width:0%;
-  transition:width .2s ease;
+  height: 100%;
+  background: #8cc63f;
+  width: 0%;
+  transition: width .2s ease;
 }
 input {
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  margin-bottom:10px;
-  border:1px solid #ccc;
-  border-radius:6px;
-  box-sizing:border-box;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 button {
-  background:#8cc63f;
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
+  background: #8cc63f;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
 }
 button.full {
-  background:#aaa;
-  cursor:not-allowed;
+  background: #aaa;
 }
 .export-btn {
-  background:#2563eb;
+  background: #2563eb;
 }
 .reset-btn {
-  background:#dc2626;
+  background: #dc2626;
 }
 .list {
-  margin-top:40px;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 3px 8px rgba(0,0,0,0.08);
+  margin-top: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 .list-item {
-  padding:10px 0;
-  border-bottom:1px solid #eee;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
 }
 .list-item:last-child {
-  border-bottom:none;
+  border-bottom: none;
 }
 .empty {
-  color:#666;
+  color: #666;
+}
+.status {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #444;
+}
+.status.error {
+  color: #b91c1c;
+}
+.status.ok {
+  color: #166534;
 }
 </style>
 </head>
@@ -146,13 +161,16 @@ button.full {
 
 <div class="container">
   <div class="topbar">
-    <div class="notice">Cada turno tiene un máximo de 13 plazas. Cada email solo puede reservar una vez.</div>
+    <div class="notice">
+      Cada turno tiene un máximo de 13 plazas. Cada email solo puede reservar una vez.
+    </div>
     <div class="actions">
       <button class="export-btn" onclick="exportarExcel()">Exportar a Excel por turnos</button>
       <button class="reset-btn" onclick="resetReservas()">Reset</button>
     </div>
   </div>
 
+  <div id="status" class="status">Cargando reservas...</div>
   <div id="slots" class="grid"></div>
 
   <div class="list">
@@ -162,8 +180,9 @@ button.full {
 </div>
 
 <script>
+const API_URL = "https://script.google.com/macros/s/AKfycbx8eiWG-RxLYYnUQ5SGodZOHGjN5eYDTkfqgY5LwKaW2AB62j_zPiXnAANpiG3rrkYN8g/exec";
+const STORAGE_FALLBACK_KEY = "reservas_aira_fallback";
 const PASSWORD_RESET = "@ira2026";
-const STORAGE_KEY = "reservas_aira";
 
 const TURNOS = [
   {id:1, nombre:"Turno 1", descripcion:"Viernes día 13 9:30 - 10:30 en TABOADA", plazas:13},
@@ -173,12 +192,14 @@ const TURNOS = [
   {id:5, nombre:"Turno 5", descripcion:"Viernes día 20 9:30 - 10:30 en FRIOL", plazas:13}
 ];
 
-function getReservas() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-}
+let reservasCache = [];
+let usandoModoLocal = false;
+render();
 
-function save(r) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(r));
+function setStatus(text, type) {
+  const el = document.getElementById("status");
+  el.textContent = text;
+  el.className = "status" + (type ? " " + type : "");
 }
 
 function escapeXml(value) {
@@ -190,12 +211,61 @@ function escapeXml(value) {
     .replace(/'/g, "&apos;");
 }
 
+function getReservas() {
+  return reservasCache;
+}
+
+function getFallbackReservas() {
+  return JSON.parse(localStorage.getItem(STORAGE_FALLBACK_KEY) || "[]");
+}
+
+function saveFallbackReservas(data) {
+  localStorage.setItem(STORAGE_FALLBACK_KEY, JSON.stringify(data));
+}
+
+function apiConfigurada() {
+  return API_URL && !API_URL.includes("PEGA_AQUI_TU_URL_DE_APPS_SCRIPT");
+}
+
+async function apiGetReservas() {
+  const res = await fetch(`${API_URL}?action=list`, { method: "GET" });
+  return await res.json();
+}
+
+async function apiCrearReserva(data) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action: "reserve",
+      ...data
+    })
+  });
+  return await res.json();
+}
+
+async function apiReset(password) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain;charset=utf-8"
+    },
+    body: JSON.stringify({
+      action: "reset",
+      password
+    })
+  });
+  return await res.json();
+}
+
 function render() {
   const cont = document.getElementById("slots");
   cont.innerHTML = "";
 
   TURNOS.forEach(t => {
-    const reservas = getReservas().filter(r => r.turno == t.id);
+    const reservas = getReservas().filter(r => Number(r.turno) === t.id);
     const ocupadas = reservas.length;
     const libres = t.plazas - ocupadas;
     const porcentaje = Math.max(0, Math.min(100, (ocupadas / t.plazas) * 100));
@@ -224,58 +294,6 @@ function render() {
   mostrarReservas();
 }
 
-function reservar(id) {
-  const nombre = document.getElementById("n" + id).value.trim();
-  const email = document.getElementById("e" + id).value.trim().toLowerCase();
-
-  if (!nombre || !email) {
-    alert("Debes completar nombre y email");
-    return;
-  }
-
-  const r = getReservas();
-
-  if (r.find(x => x.email === email)) {
-    alert("Ya tienes una reserva");
-    return;
-  }
-
-  const turno = TURNOS.find(t => t.id === id);
-  const ocupadas = r.filter(x => x.turno === id).length;
-
-  if (ocupadas >= turno.plazas) {
-    alert("Este turno ya está completo");
-    return;
-  }
-
-  r.push({
-    turno:id,
-    nombre:nombre,
-    email:email,
-    fechaReserva:new Date().toLocaleString("es-ES")
-  });
-
-  save(r);
-  render();
-}
-
-function resetReservas() {
-  const password = prompt("Introduce la contraseña para resetear las plazas:");
-  if (password === null) return;
-
-  if (password !== PASSWORD_RESET) {
-    alert("Contraseña incorrecta");
-    return;
-  }
-
-  const confirmar = confirm("¿Seguro que quieres borrar todas las reservas y poner los contadores a 0?");
-  if (!confirmar) return;
-
-  localStorage.removeItem(STORAGE_KEY);
-  render();
-  alert("Reservas reseteadas correctamente");
-}
-
 function mostrarReservas() {
   const r = getReservas();
   const div = document.getElementById("reservas");
@@ -286,9 +304,124 @@ function mostrarReservas() {
   }
 
   div.innerHTML = r.map(x => {
-    const turno = TURNOS.find(t => t.id == x.turno);
-    return `<div class="list-item"><b>${x.nombre}</b> - ${turno.nombre} (${turno.descripcion}) - ${x.email}</div>`;
+    const turno = TURNOS.find(t => t.id == Number(x.turno));
+    const descripcion = x.descripcion || (turno ? turno.descripcion : "");
+    return `<div class="list-item"><b>${x.nombre}</b> - ${turno ? turno.nombre : "Turno"} (${descripcion}) - ${x.email}</div>`;
   }).join("");
+}
+
+async function recargarReservas() {
+  if (!apiConfigurada()) {
+    usandoModoLocal = true;
+    reservasCache = getFallbackReservas();
+    setStatus("La API no está configurada todavía. La página está funcionando en modo local de prueba.", "error");
+    render();
+    return;
+  }
+
+  try {
+    const data = await apiGetReservas();
+    if (!data.ok) {
+      throw new Error(data.error || "No se pudieron cargar las reservas");
+    }
+    usandoModoLocal = false;
+    reservasCache = data.reservas || [];
+    setStatus("Reservas actualizadas.", "ok");
+    render();
+  } catch (err) {
+    usandoModoLocal = true;
+    reservasCache = getFallbackReservas();
+    setStatus("No se pudo conectar con Google Sheets.", "error");
+    render();
+  }
+}
+
+async function reservar(id) {
+  const nombre = document.getElementById("n" + id).value.trim();
+  const email = document.getElementById("e" + id).value.trim().toLowerCase();
+
+  if (!nombre || !email) {
+    alert("Debes completar nombre y email");
+    return;
+  }
+
+  if (usandoModoLocal) {
+    const r = getFallbackReservas();
+    if (r.find(x => x.email === email)) {
+      alert("Ya tienes una reserva");
+      return;
+    }
+    const turno = TURNOS.find(t => t.id === id);
+    const ocupadas = r.filter(x => Number(x.turno) === id).length;
+    if (ocupadas >= turno.plazas) {
+      alert("Este turno ya está completo");
+      return;
+    }
+    r.push({
+      turno: id,
+      descripcion: turno.descripcion,
+      nombre,
+      email,
+      fechaReserva: new Date().toLocaleString("es-ES")
+    });
+    saveFallbackReservas(r);
+    reservasCache = r;
+    render();
+    return;
+  }
+
+  try {
+    const result = await apiCrearReserva({
+      turno: id,
+      nombre,
+      email
+    });
+
+    if (!result.ok) {
+      alert(result.error || "No se pudo guardar la reserva");
+      return;
+    }
+
+    reservasCache = result.reservas || [];
+    render();
+  } catch (err) {
+    alert("Error al guardar la reserva");
+  }
+}
+
+async function resetReservas() {
+  const password = prompt("Introduce la contraseña para resetear las plazas:");
+  if (password === null) return;
+
+  const confirmar = confirm("¿Seguro que quieres borrar todas las reservas y poner los contadores a 0?");
+  if (!confirmar) return;
+
+  if (usandoModoLocal) {
+    if (password !== PASSWORD_RESET) {
+      alert("Contraseña incorrecta");
+      return;
+    }
+    localStorage.removeItem(STORAGE_FALLBACK_KEY);
+    reservasCache = [];
+    render();
+    alert("Reservas reseteadas correctamente");
+    return;
+  }
+
+  try {
+    const result = await apiReset(password);
+
+    if (!result.ok) {
+      alert(result.error || "No se pudo resetear");
+      return;
+    }
+
+    reservasCache = result.reservas || [];
+    render();
+    alert("Reservas reseteadas correctamente");
+  } catch (err) {
+    alert("Error al resetear");
+  }
 }
 
 function exportarExcel() {
@@ -309,7 +442,7 @@ function exportarExcel() {
   </Styles>`;
 
   TURNOS.forEach(turno => {
-    const datos = reservas.filter(r => r.turno === turno.id);
+    const datos = reservas.filter(r => Number(r.turno) === turno.id);
     workbook += `
   <Worksheet ss:Name="${escapeXml(turno.nombre)}">
     <Table>
@@ -335,7 +468,7 @@ function exportarExcel() {
         workbook += `
       <Row>
         <Cell><Data ss:Type="String">${escapeXml(turno.nombre)}</Data></Cell>
-        <Cell><Data ss:Type="String">${escapeXml(turno.descripcion)}</Data></Cell>
+        <Cell><Data ss:Type="String">${escapeXml(item.descripcion || turno.descripcion)}</Data></Cell>
         <Cell><Data ss:Type="String">${escapeXml(item.nombre)}</Data></Cell>
         <Cell><Data ss:Type="String">${escapeXml(item.email)}</Data></Cell>
         <Cell><Data ss:Type="String">${escapeXml(item.fechaReserva || "")}</Data></Cell>
@@ -360,7 +493,7 @@ function exportarExcel() {
   document.body.removeChild(link);
 }
 
-render();
+recargarReservas();
 </script>
 
 </body>
