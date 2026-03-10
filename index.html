@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservas Formación Aira</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background:#f5f7fb;
+  margin:0;
+  color:#1f2937;
+}
+header {
+  display:flex;
+  align-items:center;
+  background:white;
+  padding:15px 25px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+header img {
+  height:70px;
+  width:auto;
+  margin-right:20px;
+}
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:30px;
+}
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+.notice {
+  font-size:13px;
+  color:#666;
+}
+.actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.card {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.08);
+}
+.card h3 {
+  margin-top:0;
+  margin-bottom:8px;
+}
+.desc {
+  color:#555;
+  font-size:14px;
+  margin-bottom:10px;
+  min-height:38px;
+}
+.counter {
+  font-size:16px;
+  font-weight:bold;
+  margin:10px 0 4px;
+}
+.small {
+  font-size:13px;
+  color:#666;
+  margin-bottom:12px;
+}
+.progress {
+  width:100%;
+  height:10px;
+  background:#e5e7eb;
+  border-radius:999px;
+  overflow:hidden;
+  margin-bottom:14px;
+}
+.progress-bar {
+  height:100%;
+  background:#8cc63f;
+  width:0%;
+  transition:width .2s ease;
+}
+input {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  box-sizing:border-box;
+}
+button {
+  background:#8cc63f;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+button.full {
+  background:#aaa;
+  cursor:not-allowed;
+}
+.list {
+  margin-top:40px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.08);
+}
+.list-item {
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+.list-item:last-child {
+  border-bottom:none;
+}
+.export-btn {
+  background:#2563eb;
+}
+.empty {
+  color:#666;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJIAAACSCAYAAACue5OOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAABzOSURBVHhe7Z0HeBzVuYbj3J52L/fm3jRSIYWEQEKAhJ5CCIHQ2zWmmI4DxhSDsQ0YY5opxmDcjWW5N8lFLtiyjbvlblzUpVUvq97LSv4z38yZ3dndf5o0WyTN9zzvw4M1Z2Z2zrezp/znP18gV64ckGskV47INZIrR+QayZUjGpBGamlvoxP5ObR693aatHwh/X3yW3Tn+FH0t9Ej6E/PPU6XDX+ALnj0bvr50NvprCE3+sHfH3xnPL0w80N6d+l8Sti4llL27qTDWenU3tkhzj4wNSCMVOStoMRNKfTIexPo8uEPBpnDSW4bN5LeWjSXNh3cS3VNjeLqA0P90kgdnZ20/dghGp84i/747GNspUeD28c9T3M3riFvXa24s/6rfmWkzYfS6IkP3w77SYoH7nrtRfmtWNPYIO62f6lPG6mzy0eph/fTM1Pfp/MeuoutwHjjZ/fdSk9NeZf2nTouPkX/UJ80UlV9Hb2/fAFd+NgQtrLimT888ygNnjBaZvTsKXQsN0t8qr6tPmWkrKICen7GZLaC4onzH76L7n59jGyUmSlJ8k8u7r0/q08Y6WDmKRryxli20uIBtH/whty4f4/cQxyIimsjlVVXye0JrvJiCbr5eNMcykoXd2qshk4PlbbsoIy6eXTA+xrtLB9BqSX307qimyjZ83tK8lwls6rgj7St7FE6WvMBFTdvoRZfuTgDo4o0osz5RN5DRF2t4h9jp7g0UlNrK729OIHOuf9WtiKjzY/vuVn+qUrctM6wK+873SoZYCsdqX6PNpfcS0vzLqApp77QK2ZlnEGrC66RTdjZHTI21ZBHtGM40dxvEiVfRbT7OaK8JKK2KnFA9BR3Rlq6bZM8qsxVaLTBOBDMo9dl7+huIE/TOtpdMZJW5F/CGsFpPi0eTNXtIT2++hyiTYMVQ6kkXUG0bwxRdXR6h3FjpNJqLw15PfbtoL++OJymr10h30+oOrubKa8xmXaUD6cleb9mKzparCn4i/z2C9KJ6UTzvhtsKLDhFqLCjdIBp5XjIqCYG+n06dPyQN25D97BVmw0uGjYvTRhwWw66ZF+KhgVNW+Wf6qmpf87W6mxZKXnCmr2lYg7lVR1lGjZheFmAssvIsqYJw50VjE1UmFlOd0xfhRbudHgsfdfp61HDoi7CRYauzvLn6a5Wd9hKzCemJX531TYvEncuSRfs/RTdzdvJrDiYiLPWnGwM4qZkdLST9D5MRiNxqTtlOSlbKO5oGkDpZYOpRkZX2MrLN7ZV/mS+CSSutqI1t/EG0ll7bVKr88BxcRIaMD+5N6b2YqOFA9MfFUeGOw+3S3uQlFTZxGlVb4svXnOZCunr5FS+DfxySR1Nim9Oc5Efr5FdPhtqY3RJQr1TFE30stzp7MVHQkwhfL2knlU7K0UV1d0mropv3EtrS38q/TwvxhWGX0dNMS7Tov4qFap07Dit4yBQki5jqhZ09ayqagZCcFk97z5ElvhToPgtCXbNG0GodauSjpQNYESsr/HVkB/IshMjYVEC3/CG0jLgrOJSrYpZWwqKkaqbWygG8aMYCvdKc6+5yY5cG3PyWPiqgGhm7yh6Db2gfdn8Mb1qyiVN08oCWcqx9pUxI1UVlNFV48cxla+EyD2CD+XBRVl4oqKuk630cnambQo9xfsQx4o7KscK56IpD0jefOEkvAdorxVopA1RdRIBeVldFmEQlsvevweuffV2CJ1dTXC/NTeytE0O/N/2Ac78BhEla2iZ4Y5uZWX8ObhyF2ulLOgiBkpo9BDv4lAvNBVTz8s9/oQTqtVVdtRefpg6ql/YR7mwCYx+0fk625THlRtBj/6zZHwbeknZbdSzkQRMRKCtc5/+P9ZI/SU614cTuv27RJXCKigaT0lea5kH6BLgM/KHhdPTNLBCbxxONAAR2PdRI4bCY1dJ2Om0dPb8flhcfaAMurn0+LcX7IPzYWnrEV8ETsaJIP8mDcOx8pLpTLGq2IcNdKBzJOsGXoC4pBC5766pe7s8dpp8quae1AuxizN+414kpKOf8ybRo/NQ0RBXo4ZCYN+v3pkMGsKO6AHVlIVPICIcI1DVW/SnMxvsA/IxTqIXpDlk9pMi8/lTaNH/mqlLCNHjNTc1kp/ef4J1hhWwMoKGKi8plqcURF6YLsqnqMZGV9lH4qLfRbk/IROq9NEmYm8YfRYdI7ys8io10ZCGMjQt8exBjFDz0B1HVny5Cn3IFx6z8m62eJJS1pyHm8aPXaNEAWD1WsjfZi0hDWJGVhhgcFKreo7cmhTyRD2w7s4R0KW1P1XhQlbzjBGeMM7P70y0u4TR1mTGPHgO69STkmROIMiGAiBYx+f+if2g7s4D4ZNZDUV82YxIvVepaxGPTZSaZXX1lgRMnkgBkmrZl8pbSl9kP2gLpFlfdEtohYkbbydN4wR9bmisKIeGwkDhJxhQkEg/+ItiBcOCKsh9la+GJehqwOHQdTqE00LzKtxZjFixxNKWaEeGWnyysWsabRgNn7snI+pQTMX1k0++rxmCs3O/DrzwVyizaGqt0TFdNoboASYZtEMUto2Ul5ZCWscLdePfoqO5+WIEooQA42uJ/eBXGJDYvZZonYk7XmBN4wRuStFYZtGQlf/lpefY80DED77wcpF5OsKhG1iLOjT4rvYD+ISeyrbRGRAwQbeLEZsGaqUlWTLSGjrcAYCiEpEOj1VCGc9VvNhnw2kHygcrHpdqbDOFiUOiTOMHvh58ynLxS0bCW0dvbCQ1xfMEUcpqm47Tktyz2dv3CW+WOm5XNSapPU384YxomizXNSykcYlzAgz0KVPDqX9GSfFEcrad0xpuONBfYePT31RXkEs69hk3ixGICRFkiUjIbdPqImQYk/bIytp+Szuguo3l9xD+72vhrGz/Cn2+IFKbmOSUonVx3izGLHuRrmoJSOFppZBiKsqhHbsqnhWuqFBYTcYa4y0NMZr9+OJraUPKw9F6kxZWm2iBYsFujvNjVRRWyOPCcFAP73vFjmvtKqGzvy4DS6bnv5lcZe8luVfzJYbiMzL/r54KpLQE+MMY4T0JjM1EpIrwERIZ4fANVVY3jwj4yvsjcUDrpHs0eITMWDHJvFmMSJ/tbGRkPDqnKG3yY1q7UQrgszi8adMi2skeyDPk6ySrbxZjDg+xdhIK7an0p9HDgtKuIAgcu5G4g3XSPbY7x2vPJj2et4sRux5wdhIwz+aKLeRIETVbSq+m72JeMQ1kj2Ckk8su4A3jB6bBusbCXtppBfmi/8juWXP3UA809DBJ85q76qlOVn/x5YZqCAe3q+tD/CG0WPNNeaNbehg1RvsxV36F/7Mb8c+4A2jR/KV5kbKaVjBXtSl/+FpSlEqvXgLbxg9VlxsbCRv2xGalv4f7EVd+h/Ha6cqFY9l3Zxh9FjyS30jdZ/ucuOHBhh7K8cole9r4Q2jx6Jz9I10tHoSezGX/suWUqmRrcrOVMnSX/NGapN6NU6PWuN8awuvpe3lf6fDVRMpt2EllTRvl/hMTsOXUTefPq/5iNK8L9OawmvietTcDgnZZ9JKz2U0P+ds9u9aEMO+uuBq+qzsMbmDk12/VDyj7eRpXEeZ9QvlUGVMPKcUXU+zMs9gz9NTsMOAX6v+yJuGI+kK3khp3lfYC/UEmCe7fok4sz152w7TVourTJCRxEzpdXOliv0uW35N4V/EUbx83a1U254um91s6GBj8e2U17iKOrubRGmlPHcswL3j3vzhHDZU3X5CjmZwYiHFotxzxVklYckRZxqOtdfyRsICOu5Cdkgu+D01djqztRTOs67oRvY6KtvKHhFHmwvf+NDyuyqeFn81F+6He2PCjA0dgbG3UIWWwV4lte1Sw9YBtfgqKLX0vqDz2wWLMvza9QxvGo6Nt4cbCXFF3EXskFp6vzibs9pR/gR7PWDHSFBywVVB5e0YCQqNaTpS/a74i760Rkop0owkO6iD3teD7ssuXadFArP943jTcGx9KNxIyHbPXcAqc7O/I73GpVZ/hLS9fBh7XbtGQptDW96ukZCfUi37ec3H4l+NpRoJ/232Bee8dFIHvBP892YX5B2XdUT6YnCm4TgwPtxIvd0aCltMRVqLcn8edl27RkKyUm15u0ZSjYgoTKtSjbS74jnxL5FTT7PY1XVkKyfABjmcaTgyE8ON1NtGW3GztTzNHd2N/h4J8H8ACypt2RV23W1lIsrPhrSN5p4YaVbmf8m5m6xKNVJW/SLxL8ZCAx0bBqrPCA1rq8LzVD+bHWraRcxZ1kLeNBylO4ON1NZVxZ7cDvUdwWvCQ4Wez7qiG9iy6FFZfchL8oJXqXxacpf4i3Wha66WDxpDsSBPY4r8E2JHqpHwRTBSU2cxfVp8J/ulhvmxzMuKlJ0NgsubUdUm8pTnr+FNw9FUHGwkZAXhTm4HMyPNzfo2W07LyVpN/h4doV3ClVXJa9TPLqZKa6RQCps+FUfxwhhPqxpVqKOK1v3+twkiStVzl7UYZ4pdnGcevrzf+4o4Wl95DclsWSMqW8VuUUWbwg3DkfhD+fAgI9V2ZLAnt4ORkdq6qtkyoeCb29alxEHpCd8crqwKxnLMZGSkPZUviKN46XXz8fn3Vo4yPLeZkbgyHGbNgVafly1nRFnrHqWw1ZW3KdfLhwcZCZv4cie3w77KMf5vYSh2ehNWekLTM/QnlFfk/04cpS+jyrbbZoJgPu5coSDKlHs+4ETtdLYMBzK6mElvAFYPtMlkWTXSXuUegoyEhiN38liwtewhcVf6Wph7DlsWrPBcIo7Sl9FD3lXxjDjKmjC1wZ0nkpiNxkPYuZsrq0dRs9iHpGA9b5xQspQ2bZCRIOxGyF0g2mC+zUxJnsvZsiCaRtpUMpg9R6TBF8lMG4vvYMvqgW1XZRWs440Tith8OcxIiN3lLhAJFub+VO7BYToFvab93nHyhCQ4VRucT4CT0bRJtIyEOTWuvFPMzzlL7n3hGaWW3is3stVnhAgNM3HTQUaUt+5TClo1klCYkQ5XT2Qv0FtmS286PAhEXKJ36ISMvm3RMtLC3J+x5XvCzIyvyZ0EDIE4NQeHHcG5a+lR035KKYjcR5xxtKTepxwrKcxIFa1p7AV6CsZDSlsCq3OdVKyNVCF1lbmydsG8W2FT+EaFTsiukfxx2+lzefNoyVmmHCspzEjdp300Lf3f2IvYAZVc254pzhoZxdpIvZ0gRTsQ4cyRlF0j+UNfzBYAYOck7JkrFGYkCAFO3EWsgNczBsKioVgbSW+E3gyMWJ+onSHOElnZM9IgUUrSgfG8gVSQCVcj1kg9DbNNzP6BY7/tVhRrI83N+hZb1og5mV+XfxKjJTtGmpVxhiglafez4ebRkpEgDlTEGglBUtyFjJiR8WV5Hs2OMAmZ3bBMzq66rexRWl34Z7l3AhCJaCY0TLl7AdEYkOTKmWG3vdjaVSXP62F+DeZGe0p9RlbivnaUP8neB8c86UXg17ZHeAOptFaIAxWxRoKSPX9gL6bHoaq3RUljIToAXf1Psr7JnkcFcc5miuUbCW0JrpwRVkfLsRdLmvclSyE9iBAwkp030pK8X4lSkpBAizMQWBcelKdrpJO1s9iLcaBdZEV2PpSVOJ9YGgnZerlyRphN8kLo+nNlOeZk/a8opS87zzyl8AZRStKy3/AmAtmLxUEB6RoJK0mmnvpn9oKhYCt0M+GNxZXVw0pjdGPxnWxZsCL/UnGUvoxSFSILnZEQ4ciV08PK/VS2HraVfzNoGwgd7SwfwZbl2FUuvjzI3KaX4RZbk3a1K8dppGskyOpORf4M8gZCCC5XVg/E5Jgplm8k7KPCldMDMd5mwk8+V1aPjLp5oqS+7LyRjqsT5S3l4QZSOfCqckyIDI3kbTvKXjAUs0Aro6U4HFtKA4nAjdSXjGRlpt5o7jAUdBSsyI6R/DFY2EaLMxFoFgOWITI0EpTkCV5twXG0+gNxtL64chzzpJ+b9q46UcpYGDXnzgEi3Wtr7ixhy+mxp/J5UVJfoStbjPCHe5jITgZf/9SVJ4U3kcG+tqZGwipY7qJarHzbEArLldUyM/M/5WTvVoVVudx5gJU30nKDZFtOv5GsdNWtjt9hBYtVHa+Zxp4jFOTbRr4HWXqj2shSoiNTI2H/kcTsH7IXV8HCPDNhmQt6GVx5gJ8ZuwN1SJil10W28kbCCmCuLHD6jYR4JStann8RW17FjokgrJax8qbDzuV+ffZYuImWXqA0wnVkaiTIrEuKOGwrQvcX7R8MF6hlV3oulb+JVn/OjKRtM1kxEoSReEQmYlUIRp3V8k4baXrGlywvyUY+R8wSqGUTc34oh+9ifKm3Qu4F7X2prCm8VhwhadXvw40UMpIdKkMjFXlFSIEkswTnVpchqUK8MX4enBQqQL0fKz9todKuunD6pw1k1YePvxgJMdf+sA6HpF3YqWVv5WjlAOzAPfdbwSZafiFRd2DHK06GRtp8aDZVNyjd8LKWPewNqGDI3mlZmSbRKshIFt9IWkXaSItyfyFKOycrwW1a6RkJbWFZdZnBJgIe8TcDGRopvXA3TV/7uPg/RE8az3b7b8YBoQGP17AdaY0UlM3eoiJtJODkrD+GXTYU3yr+z5r0jNTqE1vmh25LusY8LhwyNFJLez099N6ZlFembM9d254lt+65GwFo+yAVTW+lTs+gkWhHWiMBu4qGkUBRk4iL7oXUNWsIV7YjzkhBO0mmvRRspEprHSDTp/3CrN/Rq/MDrsQweuiNaEHyJywG7KlCM46YrQHTKtRIVjKEaBUtI6Hhbbe9pNU+79ig8yF82ao4IwXNa66VGt2qiZht2fVkaqSpax6R30ppGdIrTxJGqROy9AfyVLB2y856fnTFtT0VFYwtHa56Rw5tMRMqP6hsxlfldWJWhQa6WtZsORQawdpr9YTNJUNsjZt5mtazS7AQKAdz+TOJGAjPMrS8Pwlpt08zxyY1uEO2ZDeSqZHWp02RjTRy5kXU4WuT/w3LoUNvRg80erFoEjE1oYsBsYYKbSHOQBwItFdjcUJJ8lzBllHBTwB+KrmyYFn+hWFlMGXBHQusLD23CnrEuytGyitSQp8ResNYMWJ1kUFizo/Y+1Xgx5P84b74GVPfRmLho1WZGim39JBsJLB8eyBpwtrC69mbculbzJDe2n6dkN5MMBFCSLDHrQ2ZGgkj209+dI5spIff/x6VVCmhtI3Sa9SJvIUusQWDuH5tuV8xUoVY22ZDpkaCMASgvpVem/9X6haDUxjn4W7Ope+ATLmyujqUzCJpY5X/tylLRtp1YqnfSGDTwcB8j92QXJf4AUM5HV0iUVjpdqm38VupN6W0g+3KkpEaW6qDjPT45LOoplHJgdjcWUrT07/E3qhLfJPs0cxG7H9F2Ry5h7JkJGjcvKuDzDRpxd3iL8hfncDeqEt8EzS9kt2zXOiqLBtp9Z73gowE9p5aKf5KtKbgWvZmXeKXhg6PqD1JXT37SVNl2Uje+sIwIw2bfDaVVSuDjsg/iYTf3A27xB9BWf4dkGUjQe8suyPMTC/OuYzaO5W1VSXNOwzn4lziB+x14qRsGWnvqaQwI4Fpax4VR2BIYAp74y7xxKDAbL9DsmWkTqlrOGzyj1kzbT0aiKBLLRnK3LxLvLC+6GZRU87JlpGg+ZtHsUZ6dNIPyFPxuXwM9rMwi6h0iR29ic7Qk20jFXvTWSOB52deLMcwQRhfmpOpH+zvEhs+yfyGPO3ltGwbCZqcdB9rJIAGuSpv6xF3sDLOQMxWJNQjI+WUHGBNpDIjZZg4EtlHttpaz+4SSQZRs69c1Iyz6pGRoIlLb2NNpLJq9zviSHsZNlwiR9BMv8PqsZFOerazBtKy5+RycbT9bCQuTjMoojk9e2wk6LUF17EGUkH80qmCQIay7WX84jyXyJNaYr4aujfqlZEyi/axBtKCcadibyCvpNVUOS7Ogn1mIqleGQn6KHkoayAtz0z7lX+hJRIVpLhhulFlW9lj8rOPpHptpMpajzwYyRlIy6hZl1BdU2AlCNaacx/axXmwdCrS6rWRoGXbX2PNE8roOZfLQXKqornvyUDFLIWhU3LESG0dTTRi6nmseUJ5Zd7V/tFvaF3RTewDcOk9c7POpM7uRvGkIytHjATtOrGENQ7HG4tuoA6fEnqCLSs2FOnny3bpOUXN+omxnJZjRoLeXzGYNQ7HpJWBNHKY+8HKXO5huPSMSHf3Q+WokeqaynXDTDjeXHyz/LOo6oD3NfahuNgDk+XtXYHmQzTkqJEgOz9x4JV5f6KGlipRmuR1Vm6UZe9A9rloy3EjQe8uu5M1jR4IPymvyROlMdG7RV5KzD0kF2Os7JgQCUXESPXNlfTklJ+zptEDy8KzigNLhes6cuRkWdzDcuFZnPtL071JIqWIGAnCHBtnGDPU9DkQstYmea5kH5pLMHMyv0H+3R9joIgZCdp8aBZrFjO2HgnEf3eTz53sNWFq+r9SVZsS5hwrRdRI0JwNI1izmJG8a6I4g6KTdbPZh+jyBXnPu1gr4kbq9LXThIXXs2Yx48Pk+6m1PTAyW9l20NEEV/0Bp9en9VQRNxLU2FpNL8z6LWsWM0bNvpRKqwOJytu6amhVwZ/YhzrQsLIHTLQUFSNBVfVFNHLGhaxZzMAgZ1p6oBFOdFpODTyQFxacqv1EPIv4UNSMBMFMz0z7NWsWK8zb9Dz5NJvOIQkCNtTjHnR/BQspchoCIczxoqgaCaqs88iBbpxRrPBSwh/IUx6cxwcN8Rma/U36M/mNa8Snji9F3UhQRW0+PTv9AtYoVlmxI7iR2dxZRmsLr2Mffn8gIeu7tlIpR1sxMRKE0Nsxn1zJmsQqaIhrFxdABU0baXHueWxl9FWQeyrak7B2FTMjQc2tdaYrUawwa/3woIlfCPu99ocplgNVgZTU8ayYGglCEniMF3EGscPwKb+gjQemibMGhK0asJ89V0nxDDbiQ0L7vqKYG0nV/NQXWYPY5bkZF8pZeEOFPWDXF93KVlo8gax3dra9iBfFjZGgw9kb6KmPz2UNYhcsNNBOAKuq78ilz8qGSb28r7AVGStwPwjss7rLZLwprowEIQQFYbicOXrC2LlX0YFMfh857CoU68UH2OIK0xzIwakKqYNO5NvbkTPWijsjqdr++UJbYbtmIHhuw/6p1NwWvncu3gLYUAYLCaPRQJ+VcYYco17eGrxVA8bY5mx4in2Txrvi1khQdUOJpZW8dpkt9fKOG3zjGzsLJWMl056KUbSq4OpeD3ZizxYkR8dOUJ6mFHGVgLJL9ssGGvPJFUH7CPclxbWRVB3LS+3xPJ0R6OmhkX80dxO1m+wGhLYVpibSvK/QltIH5U0CkzxXycAkGAxF2pgtpQ/Q9vInZRMiMWtl2yFxhmDh7bNq97vymxL3snLnm/5tzPqi+oSRICRCxcMONYOTvLXkFlqzd5Js3NBxKSeUVZwmD1Fow2owjlYsdpzqy+ozRlKFEXFM3moNECkwjYOGP95aaF+h0Y79ffGTa6SqeumnseyInB9qQepodtAVYTVYcdNf1OeMpKq2sYwWbhkbVkHR5Omp59OridfQG4tulI2BnRC447RgnGvn8Z7vZxuv6rNGUoXhAkzgOjX+FCnGJf5ZekNZ38S4r6nPG0lVV7dPbjR/tOoBeuT977OVGW2Q7mdGyt8pp/SguMv+q35jJK3QUP70wHSauPR2toIjyRMf/UzecRPtI27Mqr+qXxpJK3Trj+VultpTY+T2CVf5vQHtIqwsRm8vo2iPuOrAU783UqiaWmsov/wopaUn01qp8rFcCknmx8+/Vh4QhNnUzaABGtSYt0OXfXLSvXIPDlvYozx6Zq4gon8A8xgiboZekEcAAAAASUVORK5CYII=" alt="Aira">
+  <h2>Reserva de formación</h2>
+</header>
+
+<div class="container">
+  <div class="topbar">
+    <div class="notice">Cada turno tiene un máximo de 13 plazas. Cada email solo puede reservar una vez.</div>
+    <div class="actions">
+      <button class="export-btn" onclick="exportarExcel()">Exportar a Excel por turnos</button>
+    </div>
+  </div>
+
+  <div id="slots" class="grid"></div>
+
+  <div class="list">
+    <h3>Reservas actuales</h3>
+    <div id="reservas"></div>
+  </div>
+</div>
+
+<script>
+const TURNOS = [
+  {id:1, nombre:"Turno 1", descripcion:"Viernes día 13 9:30 - 10:30 en TABOADA", plazas:13},
+  {id:2, nombre:"Turno 2", descripcion:"Viernes día 20 9:30 - 10:30 en TABOADA", plazas:13},
+  {id:3, nombre:"Turno 3", descripcion:"Viernes día 20 16:00 - 17:00 en TABOADA", plazas:13},
+  {id:4, nombre:"Turno 4", descripcion:"Viernes día 20 9:30 - 10:30 en FRIOL", plazas:13},
+  {id:5, nombre:"Turno 5", descripcion:"Viernes día 20 9:30 - 10:30 en FRIOL", plazas:13}
+];
+
+function getReservas() {
+  return JSON.parse(localStorage.getItem("reservas_aira") || "[]");
+}
+
+function save(r) {
+  localStorage.setItem("reservas_aira", JSON.stringify(r));
+}
+
+function escapeXml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function render() {
+  const cont = document.getElementById("slots");
+  cont.innerHTML = "";
+
+  TURNOS.forEach(t => {
+    const reservas = getReservas().filter(r => r.turno == t.id);
+    const ocupadas = reservas.length;
+    const libres = t.plazas - ocupadas;
+    const porcentaje = Math.max(0, Math.min(100, (ocupadas / t.plazas) * 100));
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h3>${t.nombre}</h3>
+      <div class="desc">${t.descripcion}</div>
+      <div class="counter">${ocupadas}/${t.plazas}</div>
+      <div class="small">${libres} plazas disponibles</div>
+      <div class="progress"><div class="progress-bar" style="width:${porcentaje}%"></div></div>
+
+      <input id="n${t.id}" placeholder="Nombre">
+      <input id="e${t.id}" placeholder="Email">
+
+      <button class="${libres <= 0 ? 'full' : ''}" ${libres <= 0 ? "disabled" : ""} onclick="reservar(${t.id})">
+        ${libres <= 0 ? "Completo" : "Reservar"}
+      </button>
+    `;
+
+    cont.appendChild(card);
+  });
+
+  mostrarReservas();
+}
+
+function reservar(id) {
+  const nombre = document.getElementById("n" + id).value.trim();
+  const email = document.getElementById("e" + id).value.trim().toLowerCase();
+
+  if (!nombre || !email) {
+    alert("Debes completar nombre y email");
+    return;
+  }
+
+  const r = getReservas();
+
+  if (r.find(x => x.email === email)) {
+    alert("Ya tienes una reserva");
+    return;
+  }
+
+  const turno = TURNOS.find(t => t.id === id);
+  const ocupadas = r.filter(x => x.turno === id).length;
+
+  if (ocupadas >= turno.plazas) {
+    alert("Este turno ya está completo");
+    return;
+  }
+
+  r.push({
+    turno:id,
+    nombre:nombre,
+    email:email,
+    fechaReserva:new Date().toLocaleString("es-ES")
+  });
+
+  save(r);
+  render();
+}
+
+function mostrarReservas() {
+  const r = getReservas();
+  const div = document.getElementById("reservas");
+
+  if (!r.length) {
+    div.innerHTML = "<p class='empty'>No hay reservas todavía.</p>";
+    return;
+  }
+
+  div.innerHTML = r.map(x => {
+    const turno = TURNOS.find(t => t.id == x.turno);
+    return `<div class="list-item"><b>${x.nombre}</b> - ${turno.nombre} (${turno.descripcion}) - ${x.email}</div>`;
+  }).join("");
+}
+
+function exportarExcel() {
+  const reservas = getReservas();
+
+  let workbook = `<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="Header">
+      <Font ss:Bold="1"/>
+      <Interior ss:Color="#D9EAD3" ss:Pattern="Solid"/>
+    </Style>
+  </Styles>`;
+
+  TURNOS.forEach(turno => {
+    const datos = reservas.filter(r => r.turno === turno.id);
+    workbook += `
+  <Worksheet ss:Name="${escapeXml(turno.nombre)}">
+    <Table>
+      <Row>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Turno</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Descripción</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Nombre</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Email</Data></Cell>
+        <Cell ss:StyleID="Header"><Data ss:Type="String">Fecha reserva</Data></Cell>
+      </Row>`;
+
+    if (datos.length === 0) {
+      workbook += `
+      <Row>
+        <Cell><Data ss:Type="String">${escapeXml(turno.nombre)}</Data></Cell>
+        <Cell><Data ss:Type="String">${escapeXml(turno.descripcion)}</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+      </Row>`;
+    } else {
+      datos.forEach(item => {
+        workbook += `
+      <Row>
+        <Cell><Data ss:Type="String">${escapeXml(turno.nombre)}</Data></Cell>
+        <Cell><Data ss:Type="String">${escapeXml(turno.descripcion)}</Data></Cell>
+        <Cell><Data ss:Type="String">${escapeXml(item.nombre)}</Data></Cell>
+        <Cell><Data ss:Type="String">${escapeXml(item.email)}</Data></Cell>
+        <Cell><Data ss:Type="String">${escapeXml(item.fechaReserva || "")}</Data></Cell>
+      </Row>`;
+      });
+    }
+
+    workbook += `
+    </Table>
+  </Worksheet>`;
+  });
+
+  workbook += `
+</Workbook>`;
+
+  const blob = new Blob([workbook], { type: "application/vnd.ms-excel" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "reservas_aira_por_turnos.xls";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+render();
+</script>
+
+</body>
+</html>
